@@ -12,8 +12,8 @@ export default function AdminLogin() {
   const router = useRouter();
 
   const ADMIN_CREDENTIALS = {
-    email: process.env.ADMIN_CREDENTIALS_EMAIL,
-    password: process.env.ADMIN_CREDENTIALS_PASSWORD
+    email: process.env.NEXT_PUBLIC_ADMIN_CREDENTIALS_EMAIL,
+    password: process.env.NEXT_PUBLIC_ADMIN_CREDENTIALS_PASSWORD
   };
 
   const handleSubmit = async (e) => {
@@ -46,7 +46,7 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <button 
+        <button
           onClick={() => router.push('/')}
           className="mb-4 flex items-center text-sm text-gray-600 hover:text-gray-900"
         >
@@ -55,7 +55,7 @@ export default function AdminLogin() {
           </svg>
           Back to Portal Selection
         </button>
-        
+
         <h2 className="text-center text-3xl font-extrabold text-gray-900">
           Admin Login
         </h2>
