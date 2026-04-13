@@ -12,8 +12,8 @@ export default function AdminLogin() {
   const router = useRouter();
 
   const ADMIN_CREDENTIALS = {
-    email: 'admin@company.com',
-    password: 'admin123'
+    email: process.env.ADMIN_CREDENTIALS_EMAIL,
+    password: process.env.ADMIN_CREDENTIALS_PASSWORD
   };
 
   const handleSubmit = async (e) => {
