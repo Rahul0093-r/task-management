@@ -121,14 +121,6 @@ export default function AdminLogin() {
               </div>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
-              <h4 className="text-sm font-medium text-blue-900 mb-2">Demo Credentials:</h4>
-              <div className="text-sm text-blue-700">
-                <p>Email: admin@company.com</p>
-                <p>Password: admin123</p>
-              </div>
-            </div>
-
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-md p-4">
                 <p className="text-sm text-red-600">{error}</p>
