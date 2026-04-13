@@ -55,12 +55,6 @@ export const AuthProvider = ({ children }) => {
 
     checkCookieAuth();
 
-    // auth is null during SSR (firebase.js guards initialization to client-side only)
-    if (!auth) {
-      setLoading(false);
-      return;
-    }
-
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       console.log('Auth state changed:', user); // Debug log
       setUser(user);
