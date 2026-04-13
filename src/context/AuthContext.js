@@ -25,20 +25,20 @@ export const AuthProvider = ({ children }) => {
       const userRole = getCookie('userRole');
       const tokenTimestamp = getCookie('tokenTimestamp');
       const adminSession = getCookie('adminSession');
-      
+
       if (userRole || adminSession) {
         // Check if token is expired (24 hours)
         if (tokenTimestamp) {
           const currentTime = Date.now();
           const tokenAge = currentTime - parseInt(tokenTimestamp);
           const twentyFourHours = 24 * 60 * 60 * 1000;
-          
+
           if (tokenAge > twentyFourHours) {
             handleLogout();
             return;
           }
         }
-        
+
         setUserRole(userRole);
         if (adminSession) {
           try {
@@ -55,15 +55,21 @@ export const AuthProvider = ({ children }) => {
 
     checkCookieAuth();
 
+    // auth is null during SSR (firebase.js guards initialization to client-side only)
+    if (!auth) {
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       console.log('Auth state changed:', user); // Debug log
       setUser(user);
-      
+
       // Get user role from cookies
       if (user) {
         const storedRole = getCookie('userRole');
         setUserRole(storedRole);
-        
+
         // Set authToken cookie for middleware
         try {
           const token = await user.getIdToken();
@@ -75,7 +81,7 @@ export const AuthProvider = ({ children }) => {
         // If no Firebase user, check if we have cookie auth
         checkCookieAuth();
       }
-      
+
       setLoading(false);
     });
 
